@@ -14,32 +14,38 @@ function computerChoice(num) {
   }
 }
 
-function startRound(playerInput, computerInput) {
-  let player = playerInput.toLowerCase();
+function evaluateRound(playerInput, computerInput) {
+  let playerChoice = playerInput.toLowerCase();
 
-  if (player === "rock" && computerInput === "scissors") {
+  if (playerChoice === "rock" && computerInput === "scissors") {
     console.log("Player wins, rock beats scissors!");
-  } else if (player === "paper" && computerInput === "rock") {
+  } else if (playerChoice === "paper" && computerInput === "rock") {
     console.log("Player wins, paper beats rock!");
-  } else if (player === "scissors" && computerInput === "paper") {
+  } else if (playerChoice === "scissors" && computerInput === "paper") {
     console.log("Player wins, scissors beats paper!");
-  } else if (computerInput === "rock" && player === "scissors") {
+  } else if (computerInput === "rock" && playerChoice === "scissors") {
     console.log("Computer wins, rock beats scissors!");
-  } else if (computerInput === "paper" && player === "rock") {
+  } else if (computerInput === "paper" && playerChoice === "rock") {
     console.log("Computer wins, paper beats rock!");
-  } else if (computerInput === "scissors" && player === "paper") {
+  } else if (computerInput === "scissors" && playerChoice === "paper") {
     console.log("Computer wins, scissors beats paper!");
-  } else {
+  } else if (playerChoice === computerInput) {
     console.log("Draw, neither player nor computer wins.");
+  } else {
+    console.log("Invalid input, please try again.");
   }
 }
 
-function game() {
+function startGame() {
+  let playerRPS = prompt("Choose rock, paper, or scissors.").toLowerCase();
   let computerRPS = computerChoice(randomInt(1, 3));
-  let playerRPS = prompt("Choose rock, paper, or scissors.");
 
-  console.log(computerRPS);
-  startRound(playerRPS, computerRPS);
+  console.log("Player chose " + playerRPS + ".");
+  console.log("Computer chose " + computerRPS + ".");
+
+  evaluateRound(playerRPS, computerRPS);
 }
 
-game();
+for (let i = 0; i < 5; i++) {
+  startGame();
+}
