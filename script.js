@@ -1,3 +1,6 @@
+let playerScore = 0;
+let computerScore = 0;
+
 function randomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -15,21 +18,27 @@ function computerChoice(num) {
 }
 
 function evaluateRound(playerInput, computerInput) {
-  let playerChoice = playerInput.toLowerCase();
+  console.log("Computer chose " + computerInput + ".");
 
-  if (playerChoice === "rock" && computerInput === "scissors") {
+  if (playerInput === "rock" && computerInput === "scissors") {
     console.log("Player wins, rock beats scissors!");
-  } else if (playerChoice === "paper" && computerInput === "rock") {
+    return playerScore++;
+  } else if (playerInput === "paper" && computerInput === "rock") {
     console.log("Player wins, paper beats rock!");
-  } else if (playerChoice === "scissors" && computerInput === "paper") {
+    return playerScore++;
+  } else if (playerInput === "scissors" && computerInput === "paper") {
     console.log("Player wins, scissors beats paper!");
-  } else if (computerInput === "rock" && playerChoice === "scissors") {
+    return playerScore++;
+  } else if (computerInput === "rock" && playerInput === "scissors") {
     console.log("Computer wins, rock beats scissors!");
-  } else if (computerInput === "paper" && playerChoice === "rock") {
+    return computerScore++;
+  } else if (computerInput === "paper" && playerInput === "rock") {
     console.log("Computer wins, paper beats rock!");
-  } else if (computerInput === "scissors" && playerChoice === "paper") {
+    return computerScore++;
+  } else if (computerInput === "scissors" && playerInput === "paper") {
     console.log("Computer wins, scissors beats paper!");
-  } else if (playerChoice === computerInput) {
+    return computerScore++;
+  } else if (playerInput === computerInput) {
     console.log("Draw, neither player nor computer wins.");
   } else {
     console.log("Invalid input, please try again.");
@@ -37,15 +46,28 @@ function evaluateRound(playerInput, computerInput) {
 }
 
 function startGame() {
-  let playerRPS = prompt("Choose rock, paper, or scissors.").toLowerCase();
-  let computerRPS = computerChoice(randomInt(1, 3));
+  let rockBtn = document.getElementById("rock");
+  let paperBtn = document.getElementById("paper");
+  let scissorsBtn = document.getElementById("scissors");
+  let resultsDiv = document.getElementById("results");
 
-  console.log("Player chose " + playerRPS + ".");
-  console.log("Computer chose " + computerRPS + ".");
+  rockBtn.addEventListener("click", () => {
+    console.log("Player chose rock.");
+    evaluateRound("rock", computerChoice(randomInt(1, 3)));
+    resultsDiv.textContent = playerScore + "-" + computerScore;
+  });
 
-  evaluateRound(playerRPS, computerRPS);
+  paperBtn.addEventListener("click", () => {
+    console.log("Player chose paper.");
+    evaluateRound("paper", computerChoice(randomInt(1, 3)));
+    resultsDiv.textContent = playerScore + "-" + computerScore;
+  });
+
+  scissorsBtn.addEventListener("click", () => {
+    console.log("Player chose scissors.");
+    evaluateRound("scissors", computerChoice(randomInt(1, 3)));
+    resultsDiv.textContent = playerScore + "-" + computerScore;
+  });
 }
 
-for (let i = 0; i < 5; i++) {
-  startGame();
-}
+startGame();
