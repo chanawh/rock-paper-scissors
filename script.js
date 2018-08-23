@@ -1,3 +1,8 @@
+let rockBtn = document.getElementById("rock");
+let paperBtn = document.getElementById("paper");
+let scissorsBtn = document.getElementById("scissors");
+let resultsDiv = document.getElementById("results");
+let winnerDiv = document.getElementById("winner");
 let playerScore = 0;
 let computerScore = 0;
 
@@ -38,36 +43,45 @@ function evaluateRound(playerInput, computerInput) {
   } else if (computerInput === "scissors" && playerInput === "paper") {
     console.log("Computer wins, scissors beats paper!");
     return computerScore++;
-  } else if (playerInput === computerInput) {
-    console.log("Draw, neither player nor computer wins.");
   } else {
-    console.log("Invalid input, please try again.");
+    console.log("Draw, neither player nor computer wins.");
   }
 }
 
 function startGame() {
-  let rockBtn = document.getElementById("rock");
-  let paperBtn = document.getElementById("paper");
-  let scissorsBtn = document.getElementById("scissors");
-  let resultsDiv = document.getElementById("results");
-
   rockBtn.addEventListener("click", () => {
     console.log("Player chose rock.");
     evaluateRound("rock", computerChoice(randomInt(1, 3)));
-    resultsDiv.textContent = playerScore + "-" + computerScore;
+    displayResults();
   });
 
   paperBtn.addEventListener("click", () => {
     console.log("Player chose paper.");
     evaluateRound("paper", computerChoice(randomInt(1, 3)));
-    resultsDiv.textContent = playerScore + "-" + computerScore;
+    displayResults();
   });
 
   scissorsBtn.addEventListener("click", () => {
     console.log("Player chose scissors.");
     evaluateRound("scissors", computerChoice(randomInt(1, 3)));
-    resultsDiv.textContent = playerScore + "-" + computerScore;
+    displayResults();
   });
+}
+
+function displayResults() {
+  resultsDiv.textContent = playerScore + "-" + computerScore;
+
+  if (playerScore == 5) {
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    winnerDiv.textContent = "Player wins!";
+  } else if (computerScore == 5) {
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    winnerDiv.textContent = "Computer wins!";
+  }
 }
 
 startGame();
