@@ -10,18 +10,38 @@ body,
   display: grid;
 }
 
+#welcome,
+#progress,
 #results,
 #winner {
   text-align: center;
 }
 
+/*
+#choose,
+#progress,
+#results,
+#winner {
+  margin: auto;
+}
+*/
+
+#welcome,
+#progress {
+  grid-area: 1 / 2 / span 1 / span 1;
+  position: absolute;
+  left: 0;
+  right: 0;
+  white-space: pre-line;
+}
+
 body {
-  background: #ff8a8a;
+  background: #ff7070;
 }
 
 .container {
   grid-template-columns: 2fr 5fr 2fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 .choose {
@@ -31,24 +51,26 @@ body {
 }
 
 #rock {
-  grid-area: 3 / 2 / span 2 / span 1;
+  grid-area: 2 / 2 / span 3 / span 1;
 }
 
 #paper {
-  grid-area: 3 / 4 / span 2 / span 1;
+  grid-area: 2 / 4 / span 3 / span 1;
 }
 
 #scissors {
-  grid-area: 3 / 6 / span 2 / span 1;
+  grid-area: 2 / 6 / span 3 / span 1;
 }
 
 #results {
-  grid-area: 1 / 2 / span 1 / span 1;
-  margin-top: 40px;
+  grid-area: 2 / 2 / span 1 / span 1;
+  margin-top: 80px;
 }
 
 #winner {
   grid-area: 2 / 2 / span 1 / span 1;
+  /*
   text-decoration: underline;
   text-decoration-skip-ink: none;
+  */
 }
